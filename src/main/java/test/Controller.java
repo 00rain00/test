@@ -46,8 +46,12 @@ public class Controller {
         
         return userMoney-pm;
     }
-    static boolean isValideChoice(int chooseID,Poketmon pm,User user){
-        int price = pm.getPrice();
+    static boolean isValideChoice(int price,User user){
+        //check null pointer exception
+        if(price ==0){
+            return false;
+        }
+        
         int money = user.getMoney();
         if(price>money){
             return false;

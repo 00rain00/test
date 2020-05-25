@@ -37,9 +37,7 @@ public final class App {
          pmList.add(pm9);
          //end creation
         //show all the pms
-        boolean flag = true;
-
-        while(flag){   
+        
 
         for(Poketmon pm: pmList){
             System.out.println(Controller.display(pm));
@@ -51,10 +49,10 @@ public final class App {
         int userMoney = user.getMoney();
             while(continuePutMoney){
             // ask user to put money
-            System.out.println("please put money:");
+            System.out.println("please insert money(10,50,100,500,1000):");
             int userIn = scan.nextInt();
             while( ! Controller.isValideMoney(userIn)){
-               System.out.println("unaccept money, plz input again");
+               System.out.println("wrong input, plz input again");
                userIn = scan.nextInt();
                
            }
@@ -75,39 +73,52 @@ public final class App {
             //end display avaliable poketmon
 
             //choose poketmon
-            //TODO: validation
-                System.out.println("select the poketmon with $:");
-                int selectedPoketmonIndex = scan.nextInt();
+            
+                
+              
+            int selectedPoketmonIndex=0;
+            int selectedPoketmonPrice=0;
+                    do{
+                    System.out.println(" please select the poketmon with $:");
+                    selectedPoketmonIndex= scan.nextInt();
+                    
+                    for (Poketmon poketmon : pmList) {
+                        if(poketmon.getPoketmonID()==selectedPoketmonIndex){
+                            selectedPoketmonPrice=poketmon.getPrice();
+                            break;
+                        }
+                    }
+                }while(!Controller.isValideChoice(selectedPoketmonPrice, user));
                 user.setChoice(selectedPoketmonIndex);
+                   
+                
+                
             //endchoose poketmon
 
             //display choose poketmon
 
+            
+            //display successful information
+           
+                ShowImage.showImage(user.getChoice());
+            
             //return money
             //get poketmon by arrayList
-            int selectedPoketmonPrice = 0;
+            int change=0;
             for (Poketmon poketmon : pmList) {
-                if(poketmon.getPoketmonID()==selectedPoketmonIndex){
-                    selectedPoketmonPrice=poketmon.getPrice();
+                if(poketmon.getPoketmonID()==user.getChoice()){
+                    change = Controller.change(user, poketmon.getPrice());
                 }
             }
-            int returnMoney = Controller.change(user, selectedPoketmonPrice);
+           
             System.out.println(
-                "change: "+returnMoney
+                " your change: "+change
             );
             //end return money
-            //display successful information
-            for (Poketmon poketmon : pmList) {
-                if(poketmon.getPoketmonID()==selectedPoketmonIndex){
-                   System.out.println(Controller.display(poketmon));
-                    
-                }
-            }
+
          
 
-          System.out.println("contine? true-yes false-no");
-          flag = scan.nextBoolean();
-        }
+        
 		scan.close();
         System.out.println("Bye-Bye");
     }
