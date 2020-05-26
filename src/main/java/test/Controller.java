@@ -9,7 +9,10 @@ public class Controller {
        String poketmonName = pm.getName();
        int poketID = pm.getPoketmonID();
        int poketPrice = pm.getPrice();
-       String message = poketID+" "+poketmonName+" "+poketPrice;
+       String attribute = pm.getAttributes();
+       int level = pm.getLevel();
+       String rareness = pm.getRareness();
+       String message = poketID+" "+poketmonName+" "+attribute+" "+level+" "+poketPrice+" "+rareness;
        return message;
     }
     static boolean isValideMoney(int money){
@@ -41,7 +44,7 @@ public class Controller {
 
     static int change(User user,int pm){
         //return change 
-        int change = 0;
+     
         int userMoney = user.getMoney();
         
         return userMoney-pm;

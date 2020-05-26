@@ -1,5 +1,6 @@
 package test;
 
+
 public class Poketmon {
     private int price;
     private String name;
@@ -23,7 +24,7 @@ public class Poketmon {
     public int getLevel() {
         return this.levels;
     }
-    public Stirng getRareness() {
+    public String getRareness() {
         return this.rareness;
     }
     public void setName(String name){
